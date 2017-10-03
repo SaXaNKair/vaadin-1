@@ -17,7 +17,7 @@ public class CompaniesGrid extends Grid<Company> {
         removeColumn("seafood");
         removeColumn("persisted");
         setColumnOrder("name", "address", "phone", "email");
-        setWidth("80%");
+        setSizeFull();
         GridCellFilter filter = new GridCellFilter(this, Company.class);
         filter.setTextFilter("name", true, true);
         filter.setTextFilter("address", true, true);

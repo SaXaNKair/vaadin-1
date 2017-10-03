@@ -15,30 +15,16 @@ import java.util.List;
 public class GridUI extends UI {
     private VerticalLayout root;
 
-//    @Autowired
-//    private FrozenCompanies frozenListLayout;
-//    @Autowired
-//    private VeggiesCompanies veggiesLayout;
-//    @Autowired
-//    private SeafoodCompanies seafoodLayout;
-//    @Autowired
-//    private AdminUI adminGrid;
-//    private CompanyForm form;
-
     @Autowired
     private CompaniesRepository repo;
 
     private List<Company> companyList;
-
-    private Company selectedCompany;
     private TabSheet tabSheet;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         addLayout();
         updateList();
-
-//        addTabSheet();
     }
 
     private enum TYPE {
@@ -68,7 +54,7 @@ public class GridUI extends UI {
     private void addSeafoodTab() {
         CompaniesGrid grid = getCompanies(TYPE.FROZEN);
         VerticalLayout tab = new VerticalLayout(grid);
-        tabSheet.addTab(tab, "Заморозка");
+        tabSheet.addTab(tab, "Морепродукты");
     }
 
     private void addVeggiesTab() {
@@ -84,19 +70,42 @@ public class GridUI extends UI {
     }
 
     private void addAdminTab() {
+
         Grid<Company> grid = new AdminCompaniesGrid(repo.findAll());
-        HorizontalLayout adminTab = new HorizontalLayout(grid);
-        adminTab.setWidth("100%");
+        CompanyForm form = new CompanyForm(this, repo);
+
+        HorizontalLayout gridAndForm = new HorizontalLayout(grid, form);
+        gridAndForm.setSizeFull();
+//        gridAndForm.setExpandRatio(grid, 1);
+        grid.asSingleSelect().addValueChangeListener(e -> {
+           if (e.getValue() == null)
+               form.setVisible(false);
+           else {
+               form.setVisible(true);
+               form.setCompany(e.getValue());
+           }
+        });
+
+        Button addCompanyBtn = new Button("Добавить компанию");
+        addCompanyBtn.addClickListener(e -> {
+            grid.asSingleSelect().clear();
+            form.setCompany(new Company());
+        });
+
+        VerticalLayout adminTab = new VerticalLayout(addCompanyBtn, gridAndForm);
+        adminTab.setSizeFull();
+        adminTab.setSpacing(true);
         tabSheet.addTab(adminTab, "Администрирование");
     }
 
     private void addTabs() {
-        tabSheet = new TabSheet();
+        if (tabSheet == null)
+            tabSheet = new TabSheet();
         tabSheet.setSizeFull();
         root.addComponent(tabSheet);
     }
 
-    private void updateList() {
+    public void updateList() {
         companyList = repo.findAll();
         if (tabSheet != null)
             tabSheet.removeAllComponents();
@@ -106,44 +115,6 @@ public class GridUI extends UI {
         addVeggiesTab();
         addSeafoodTab();
     }
-
-
-
-
-//    private void addTabSheet() {
-//        TabSheet tabSheet = new TabSheet();
-//        tabSheet.setSizeFull();
-//        root.addComponent(tabSheet);
-//
-//        form = new CompanyForm(this);
-//        HorizontalLayout adminTab = new HorizontalLayout(adminGrid, form);
-//        adminTab.setSizeFull();
-//        adminGrid.setSizeFull();
-//        adminTab.setExpandRatio(adminGrid, 0.8f);
-//        adminGrid.getTable().asSingleSelect().addValueChangeListener(e -> {
-//            if (e.getValue() == null)
-//                form.setVisible(false);
-//            else {
-//                form.setVisible(true);
-//                form.setCompany(e.getValue());
-//            }
-//        });
-//        tabSheet.addTab(adminTab, "Администрирование");
-//
-//        VerticalLayout tab1 = new VerticalLayout();
-//        tab1.addComponent(frozenListLayout);
-//        tabSheet.addTab(tab1, "Заморозка");
-//
-//        VerticalLayout tab2 = new VerticalLayout();
-//        tab2.addComponent(veggiesLayout);
-//        tabSheet.addTab(tab2, "Овощи");
-//
-//        VerticalLayout tab3 = new VerticalLayout();
-//        tab3.addComponent(seafoodLayout);
-//        tabSheet.addTab(tab3, "Морепродукты");
-//    }
-
-
 
     private void addLayout() {
         root = new VerticalLayout();
