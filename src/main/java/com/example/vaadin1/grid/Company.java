@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Company {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private String name;
     private String address;
@@ -93,5 +93,9 @@ public class Company {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isPersisted() {
+        return id != null;
     }
 }
