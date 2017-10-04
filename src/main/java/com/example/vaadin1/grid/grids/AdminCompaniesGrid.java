@@ -5,7 +5,6 @@ import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.renderers.ComponentRenderer;
 import org.vaadin.gridutil.cell.GridCellFilter;
-import org.vaadin.gridutil.renderer.BooleanRenderer;
 
 import java.util.List;
 
@@ -21,6 +20,10 @@ public class AdminCompaniesGrid extends Grid<Company> {
         removeColumn("persisted");
         setColumnOrder("id", "name", "address", "phone", "email");
         setSizeFull();
+        getColumn("name").setCaption("Наименование организации");
+        getColumn("address").setCaption("Юридически адрес");
+        getColumn("phone").setCaption("Телефон");
+        getColumn("email").setCaption("Эл. почта");
 
         removeColumn("frozen");
         addColumn(company -> {

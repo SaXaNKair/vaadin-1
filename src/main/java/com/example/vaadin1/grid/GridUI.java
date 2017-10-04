@@ -1,10 +1,13 @@
 package com.example.vaadin1.grid;
 
-import com.example.vaadin1.grid.grids.*;
+import com.example.vaadin1.grid.grids.AdminCompaniesGrid;
+import com.example.vaadin1.grid.grids.CompaniesGrid;
+import com.example.vaadin1.grid.grids.CompanyForm;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -24,7 +27,19 @@ public class GridUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         addLayout();
+        addHeader();
         updateList();
+        addFooter();
+    }
+
+    private void addFooter() {
+
+    }
+
+    private void addHeader() {
+        Label header = new Label("БАЗА ДАННЫХ ПОСТАВЩИКОВ ПРОДУКТОВ ПИТАНИЯ");
+        header.addStyleName(ValoTheme.LABEL_H1);
+        root.addComponent(header);
     }
 
     private enum TYPE {
@@ -52,7 +67,7 @@ public class GridUI extends UI {
     }
 
     private void addSeafoodTab() {
-        CompaniesGrid grid = getCompanies(TYPE.FROZEN);
+        CompaniesGrid grid = getCompanies(TYPE.SEAFOOD);
         VerticalLayout tab = new VerticalLayout(grid);
         tabSheet.addTab(tab, "Морепродукты");
     }
@@ -64,7 +79,7 @@ public class GridUI extends UI {
     }
 
     private void addFrozenTab() {
-        Grid<Company> grid = getCompanies(TYPE.SEAFOOD);
+        Grid<Company> grid = getCompanies(TYPE.FROZEN);
         VerticalLayout tab = new VerticalLayout(grid);
         tabSheet.addTab(tab, "Заморозка");
     }
@@ -76,7 +91,7 @@ public class GridUI extends UI {
 
         HorizontalLayout gridAndForm = new HorizontalLayout(grid, form);
         gridAndForm.setSizeFull();
-//        gridAndForm.setExpandRatio(grid, 1);
+        gridAndForm.setExpandRatio(grid, 1);
         grid.asSingleSelect().addValueChangeListener(e -> {
            if (e.getValue() == null)
                form.setVisible(false);
@@ -119,10 +134,8 @@ public class GridUI extends UI {
     private void addLayout() {
         root = new VerticalLayout();
         root.setSpacing(true);
+        root.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
         setContent(root);
     }
-
-
-
 
 }
