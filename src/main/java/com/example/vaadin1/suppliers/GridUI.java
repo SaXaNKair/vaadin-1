@@ -1,8 +1,8 @@
-package com.example.vaadin1.grid;
+package com.example.vaadin1.suppliers;
 
-import com.example.vaadin1.grid.grids.AdminCompaniesGrid;
-import com.example.vaadin1.grid.grids.CompaniesGrid;
-import com.example.vaadin1.grid.grids.CompanyForm;
+import com.example.vaadin1.suppliers.elements.AdminCompaniesGrid;
+import com.example.vaadin1.suppliers.elements.CompaniesGrid;
+import com.example.vaadin1.suppliers.elements.CompanyForm;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-@Theme("valo")
+@Theme("apptheme")
 @SpringUI
 public class GridUI extends UI {
     private VerticalLayout root;
@@ -133,6 +133,7 @@ public class GridUI extends UI {
 
     private void addLayout() {
         root = new VerticalLayout();
+        root.setId("root");
         root.setSpacing(true);
         root.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
         setContent(root);

@@ -1,4 +1,4 @@
-package com.example.vaadin1.grid;
+package com.example.vaadin1.suppliers;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

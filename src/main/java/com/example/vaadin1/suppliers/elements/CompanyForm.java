@@ -1,8 +1,8 @@
-package com.example.vaadin1.grid.grids;
+package com.example.vaadin1.suppliers.elements;
 
-import com.example.vaadin1.grid.CompaniesRepository;
-import com.example.vaadin1.grid.Company;
-import com.example.vaadin1.grid.GridUI;
+import com.example.vaadin1.suppliers.CompaniesRepository;
+import com.example.vaadin1.suppliers.Company;
+import com.example.vaadin1.suppliers.GridUI;
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.*;
@@ -36,10 +36,10 @@ public class CompanyForm extends FormLayout {
         binder.bindInstanceFields(this);
         setVisible(false);
         setSizeUndefined();
-        HorizontalLayout buttons = new HorizontalLayout(save, delete, hide);
-        addComponents(name, address, phone, email, frozen, veggies, seafood, buttons);
+        HorizontalLayout buttons = new HorizontalLayout(save, delete);
+        addComponents(name, address, phone, email, frozen, veggies, seafood, buttons, hide);
         save.addClickListener(e -> this.save());
-        save.setStyleName(ValoTheme.BUTTON_PRIMARY);
+        save.setStyleName(ValoTheme.BUTTON_FRIENDLY);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         delete.addClickListener(e -> this.delete());
         delete.setStyleName(ValoTheme.BUTTON_DANGER);
