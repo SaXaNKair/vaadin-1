@@ -1,6 +1,6 @@
-package com.example.vaadin1.suppliers.elements;
+package com.example.vaadin1.suppliers.ui.elements;
 
-import com.example.vaadin1.suppliers.Company;
+import com.example.vaadin1.suppliers.backend.entity.Company;
 import com.vaadin.ui.Grid;
 import org.vaadin.gridutil.cell.GridCellFilter;
 

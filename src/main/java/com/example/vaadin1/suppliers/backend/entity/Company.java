@@ -1,14 +1,9 @@
-package com.example.vaadin1.suppliers;
+package com.example.vaadin1.suppliers.backend.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
-public class Company {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Company extends AbstractEntity {
 
     private String name;
     private String address;
@@ -55,14 +50,6 @@ public class Company {
         this.frozen = frozen;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -95,7 +82,4 @@ public class Company {
         this.email = email;
     }
 
-    public boolean isPersisted() {
-        return id != null;
-    }
 }

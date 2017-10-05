@@ -23,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<vaadin.version>8.1.0</vaadin.version>
+		<vaadin-spring.version>2.1.0.beta2</vaadin-spring.version>
 	</properties>
 
 	<dependencies>
@@ -60,6 +61,20 @@
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
 
+        <!-- security -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-security</artifactId>
+			<version>${vaadin-spring.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
 	</dependencies>
 
 	<repositories>

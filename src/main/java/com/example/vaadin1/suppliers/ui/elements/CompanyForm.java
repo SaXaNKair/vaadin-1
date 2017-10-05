@@ -1,8 +1,8 @@
-package com.example.vaadin1.suppliers.elements;
+package com.example.vaadin1.suppliers.ui.elements;
 
-import com.example.vaadin1.suppliers.CompaniesRepository;
-import com.example.vaadin1.suppliers.Company;
-import com.example.vaadin1.suppliers.GridUI;
+import com.example.vaadin1.suppliers.backend.CompaniesRepository;
+import com.example.vaadin1.suppliers.backend.entity.Company;
+import com.example.vaadin1.suppliers.ui.AppUI;
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.*;
@@ -25,11 +25,11 @@ public class CompanyForm extends FormLayout {
     private final Button hide = new Button("Свернуть");
 
     private CompaniesRepository repo;
-    private GridUI ui;
+    private AppUI ui;
     private Company company;
     private final Binder<Company> binder = new Binder<>(Company.class);
 
-    public CompanyForm(GridUI ui, CompaniesRepository repo) {
+    public CompanyForm(AppUI ui, CompaniesRepository repo) {
         this.ui = ui;
         this.repo = repo;
 

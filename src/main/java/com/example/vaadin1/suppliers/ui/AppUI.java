@@ -1,11 +1,15 @@
-package com.example.vaadin1.suppliers;
+package com.example.vaadin1.suppliers.ui;
 
-import com.example.vaadin1.suppliers.elements.AdminCompaniesGrid;
-import com.example.vaadin1.suppliers.elements.CompaniesGrid;
-import com.example.vaadin1.suppliers.elements.CompanyForm;
+import com.example.vaadin1.suppliers.backend.CompaniesRepository;
+import com.example.vaadin1.suppliers.backend.entity.Company;
+import com.example.vaadin1.suppliers.ui.elements.AdminCompaniesGrid;
+import com.example.vaadin1.suppliers.ui.elements.CompaniesGrid;
+import com.example.vaadin1.suppliers.ui.elements.CompanyForm;
+import com.example.vaadin1.suppliers.ui.navigation.NavigationManager;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +19,21 @@ import java.util.List;
 
 @Theme("apptheme")
 @SpringUI
-public class GridUI extends UI {
+public class AppUI extends UI {
+
+    private final SpringViewProvider viewProvider;
+
+    private final NavigationManager navigationManager;
+
+    private final MainView mainView;
+
+    @Autowired
+    public AppUI(SpringViewProvider viewProvider, NavigationManager navigationManager, MainView mainView) {
+        this.viewProvider = viewProvider;
+        this.navigationManager = navigationManager;
+        this.mainView = mainView;
+    }
+
     private VerticalLayout root;
 
     @Autowired
