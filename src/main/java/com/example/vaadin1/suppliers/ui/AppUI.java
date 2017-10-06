@@ -1,5 +1,6 @@
 package com.example.vaadin1.suppliers.ui;
 
+import com.example.vaadin1.suppliers.app.HasLogger;
 import com.example.vaadin1.suppliers.backend.CompaniesRepository;
 import com.example.vaadin1.suppliers.backend.entity.Company;
 import com.example.vaadin1.suppliers.ui.elements.AdminCompaniesGrid;
@@ -7,6 +8,7 @@ import com.example.vaadin1.suppliers.ui.elements.CompaniesGrid;
 import com.example.vaadin1.suppliers.ui.elements.CompanyForm;
 import com.example.vaadin1.suppliers.ui.navigation.NavigationManager;
 import com.vaadin.annotations.Theme;
+import com.vaadin.server.DefaultErrorHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
@@ -19,7 +21,7 @@ import java.util.List;
 
 @Theme("apptheme")
 @SpringUI
-public class AppUI extends UI {
+public class AppUI extends UI implements HasLogger {
 
     private final SpringViewProvider viewProvider;
 
@@ -44,6 +46,11 @@ public class AppUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+        setErrorHandler(event -> {
+            Throwable t = DefaultErrorHandler.findRelevantThrowable(event.getThrowable());
+            getLogger().error("Error during request", t);
+        });
+
         addLayout();
         addHeader();
         updateList();

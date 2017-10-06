@@ -1,7 +1,9 @@
 package com.example.vaadin1.suppliers.backend;
 
-public class Role {
-	public static final String GUEST = "гость";
+import org.springframework.security.core.GrantedAuthority;
+
+public class Role implements GrantedAuthority {
+	public static final String USER = "guest";
 	public static final String ADMIN = "admin";
 
 	private Role() {
@@ -9,7 +11,11 @@ public class Role {
 	}
 
 	public static String[] getAllRoles() {
-		return new String[] { GUEST, ADMIN };
+		return new String[] {USER, ADMIN };
 	}
 
+	@Override
+	public String getAuthority() {
+		return null;
+	}
 }
