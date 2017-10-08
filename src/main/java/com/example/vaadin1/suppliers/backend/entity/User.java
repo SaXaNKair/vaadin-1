@@ -1,5 +1,6 @@
 package com.example.vaadin1.suppliers.backend.entity;
 
+import com.example.vaadin1.suppliers.backend.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -22,7 +23,7 @@ public class User extends AbstractEntity implements UserDetails{
 
 	@NotNull
 	@Size(min = 1, max = 255)
-	private Collection<Role> role;
+	private Collection<Role> role; // TODO: 09.10.17
 
 	private boolean locked = false;
 
@@ -30,14 +31,14 @@ public class User extends AbstractEntity implements UserDetails{
 		// An empty constructor is needed for all beans
 	}
 
-	public User(String email, String name, String password, String role) {
-		Objects.requireNonNull(name);
+	public User(String email, String name, String password, Collection<Role> role) {
+        Objects.requireNonNull(name);
 		Objects.requireNonNull(password);
 		Objects.requireNonNull(role);
 
 		this.username = name;
 		this.password = password;
-		this.role = role;
+        this.role = role;
 	}
 
 	@Override
@@ -80,14 +81,6 @@ public class User extends AbstractEntity implements UserDetails{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public boolean isLocked() {

@@ -160,6 +160,7 @@ public class AppUI extends UI implements HasLogger {
         root = new VerticalLayout();
         root.setId("root");
         root.setSpacing(true);
+        root.setSizeFull();
         root.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
         setContent(root);
     }
