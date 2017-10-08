@@ -21,7 +21,7 @@ public class User extends AbstractEntity implements UserDetails{
 	@Size(min = 4, max = 255)
 	private String password;
 
-	@NotNull
+    @NotNull
 	@Size(min = 1, max = 255)
 	private Collection<Role> role; // TODO: 09.10.17
 
@@ -31,7 +31,7 @@ public class User extends AbstractEntity implements UserDetails{
 		// An empty constructor is needed for all beans
 	}
 
-	public User(String email, String name, String password, Collection<Role> role) {
+	public User(String name, String password, Collection<Role> role) {
         Objects.requireNonNull(name);
 		Objects.requireNonNull(password);
 		Objects.requireNonNull(role);
@@ -57,23 +57,31 @@ public class User extends AbstractEntity implements UserDetails{
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return locked;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
+
+    public Collection<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(Collection<Role> role) {
+        this.role = role;
+    }
 
 	public void setUsername(String username) {
 		this.username = username;
